@@ -5,7 +5,10 @@
  */
 package servertcp;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
@@ -27,8 +30,8 @@ public class ServerTcp {
             Socket connectionSocket = welcomSocket.accept();
 
             // Usate gli Stream e non lo Scanner
-            Scanner in = new Scanner(connectionSocket.getInputStream());
-            message = in.nextLine();
+            BufferedReader fin =new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+            message = fin.readLine();
 
             System.out.println("il server ha ricevuto dal nodo: " + connectionSocket.getRemoteSocketAddress() + " che ci scrive: " + message);
 
